@@ -7,11 +7,19 @@ interface BreadcrumbsProps {
   basePath: string;
 }
 
+const TAXONOMY_PREFIX = "categories/";
+
+function toCategorySlugPath(permalink: string): string {
+  return permalink.startsWith(TAXONOMY_PREFIX)
+    ? permalink.slice(TAXONOMY_PREFIX.length)
+    : permalink;
+}
+
 export function Breadcrumbs({ taxon, basePath }: BreadcrumbsProps) {
   // Build breadcrumb items from ancestors + current taxon
   const items = [
     { name: "Home", href: basePath },
-    { name: "Categories", href: `${basePath}/taxonomies` },
+    { name: "Collections", href: `${basePath}/collections` },
   ];
 
   // Add ancestors (they come from the API in order from root to parent)
@@ -21,7 +29,7 @@ export function Breadcrumbs({ taxon, basePath }: BreadcrumbsProps) {
       if (!ancestor.is_root) {
         items.push({
           name: ancestor.name,
-          href: `${basePath}/t/${ancestor.permalink}`,
+          href: `${basePath}/collections/${toCategorySlugPath(ancestor.permalink)}`,
         });
       }
     });

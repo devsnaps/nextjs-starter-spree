@@ -8,7 +8,7 @@ function toCategorySlugPath(permalink: string): string {
     : permalink;
 }
 
-interface LegacyCategoryPageProps {
+interface LegacyCategoriesPageProps {
   params: Promise<{
     country: string;
     locale: string;
@@ -16,9 +16,9 @@ interface LegacyCategoryPageProps {
   }>;
 }
 
-export default async function LegacyCategoryPage({
+export default async function LegacyCategoriesPage({
   params,
-}: LegacyCategoryPageProps) {
+}: LegacyCategoriesPageProps) {
   const { country, locale, permalink } = await params;
   redirect(
     `/${country}/${locale}/collections/${toCategorySlugPath(permalink.join("/"))}`,

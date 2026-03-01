@@ -30,10 +30,10 @@ export function Header() {
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <Link
-              href={`${basePath}/taxonomies`}
+              href={`${basePath}/collections`}
               className="text-gray-600 hover:text-gray-900 transition-colors"
             >
-              Categories
+              Collections
             </Link>
           </nav>
 

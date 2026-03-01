@@ -5,6 +5,13 @@ import { GridIcon } from "@/components/icons";
 import { getTaxonomies } from "@/lib/data/taxonomies";
 
 export const revalidate = 60;
+const TAXONOMY_PREFIX = "categories/";
+
+function toCategorySlugPath(permalink: string): string {
+  return permalink.startsWith(TAXONOMY_PREFIX)
+    ? permalink.slice(TAXONOMY_PREFIX.length)
+    : permalink;
+}
 
 interface CategoriesPageProps {
   params: Promise<{
@@ -37,11 +44,11 @@ export default async function CategoriesPage({ params }: CategoriesPageProps) {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Categories</h1>
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">Collections</h1>
 
       {taxonomies.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-gray-500">No categories found.</p>
+          <p className="text-gray-500">No collections found.</p>
         </div>
       ) : (
         <div className="space-y-12">
@@ -62,7 +69,7 @@ export default async function CategoriesPage({ params }: CategoriesPageProps) {
                       return (
                         <Link
                           key={taxon.id}
-                          href={`${basePath}/t/${taxon.permalink}`}
+                          href={`${basePath}/collections/${toCategorySlugPath(taxon.permalink)}`}
                           className="group"
                         >
                           <div className="relative aspect-square bg-white border border-gray-200 rounded-xl overflow-hidden mb-3 group-hover:ring-2 group-hover:ring-primary-500 transition-all">
@@ -93,7 +100,7 @@ export default async function CategoriesPage({ params }: CategoriesPageProps) {
                     })}
                   </div>
                 ) : (
-                  <p className="text-gray-500">No categories in this group.</p>
+                  <p className="text-gray-500">No collections in this group.</p>
                 )}
               </div>
             );

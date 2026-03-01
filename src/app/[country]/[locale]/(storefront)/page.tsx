@@ -34,7 +34,7 @@ export default async function HomePage({ params }: HomePageProps) {
                 Shop Now
               </Link>
               <Link
-                href={`${basePath}/taxonomies`}
+                href={`${basePath}/collections`}
                 className="border border-white text-white px-6 py-3 rounded-xl font-medium hover:bg-white/10 transition-colors"
               >
                 Browse Categories
